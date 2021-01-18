@@ -15,6 +15,6 @@ describe('Product', () => {
 
     sell(product, 3);
 
-    expect(product.stock).toBe(9);
+    expect(product.stock).toBe(7);
   });
 });
