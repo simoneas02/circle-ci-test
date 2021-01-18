@@ -25,12 +25,4 @@ workflows:
   circle_ci_test:
     jobs:
       - install_node
-          filters:
-            branches:
-              only:
-                - main
       - test
-          filters:
-            branches:
-              only:
-                - main
