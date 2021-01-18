@@ -1,7 +1,7 @@
 jobs:
   install-dependencies:
     docker:
-      - image: cimg/node:12.18.4
+      - image: cimg/node:15.6.0
     steps:
       - checkout
       - node/install:
