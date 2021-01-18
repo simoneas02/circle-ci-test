@@ -1,7 +1,7 @@
 jobs:
-  install-node:
+  install_node:
     docker:
-      - image: 'cimg/base:stable'
+      - image: cimg/node:12.18.4
     steps:
       - checkout
       - node/install:
@@ -20,9 +20,17 @@ jobs:
           name: Run YARN tests
 orbs:
   node: circleci/node@3.0.0
-version: 2.1
 workflows:
-  test_my_app:
+  version: 2.1
+  circle_ci_test:
     jobs:
-      - install-node
+      - install_node
+          filters:
+            branches:
+              only:
+                - main
       - test
+          filters:
+            branches:
+              only:
+                - main
