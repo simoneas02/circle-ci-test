@@ -19,6 +19,10 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
   unit_tests:
     executor:
       name: node/default
