@@ -20,8 +20,8 @@ jobs:
           name: Run YARN tests
 orbs:
   node: circleci/node@3.0.0
+version: 2.1
 workflows:
-  version: 2.1
   circle_ci_test:
     jobs:
       - install_node
