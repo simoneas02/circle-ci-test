@@ -1,5 +1,5 @@
 jobs:
-  install_node:
+  install-dependencies:
     docker:
       - image: cimg/node:12.18.4
     steps:
@@ -7,7 +7,19 @@ jobs:
       - node/install:
           install-yarn: true
       - run: node --version
-  test:
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --immutable
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+  unit_tests:
     executor:
       name: node/default
       tag: '13'
@@ -24,5 +36,7 @@ version: 2.1
 workflows:
   circle_ci_test:
     jobs:
-      - install_node
-      - test
+      - install-dependencies
+      - unit_tests:
+          requires:
+            - install-dependencies
